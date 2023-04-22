@@ -6,7 +6,7 @@ package Informacion;
 
 /**
  * DTO -> Data Transfer Object
- * @author hugo4295
+ * @author aaronsvl1
  */
 public class DatosDTO {
     String nombre;
@@ -50,5 +50,6 @@ public class DatosDTO {
     public String toString() {
         return "Datos ->" + nombre + " " + edad + " " + correo;
     }
+
        
 }

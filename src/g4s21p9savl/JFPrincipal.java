@@ -2,15 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package g4s21p9hugo;
+package g4s21p9savl;
 
 import Informacion.DatosDTO;
+import almacen.Archivos;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author hugo4295
+ * @author aaronsvl1
  */
 public class JFPrincipal extends javax.swing.JFrame {
     DatosDTO datosDTO;
@@ -170,6 +171,8 @@ public class JFPrincipal extends javax.swing.JFrame {
         datosDTO.setNombre(txtnombre.getText());
         datosDTO.setEdad(Integer.valueOf(txtedad.getText()));
         datosDTO.setCorreo(txtcorreo.getText());
+        Archivos archivo = new Archivos();
+        archivo.grabar(datosDTO.getNombre(), datosDTO.getEdad(), datosDTO.getCorreo());
         listadatos.add(datosDTO);
         lblnreg.setText("Numero de registros: " + String.valueOf(listadatos.size()));
         lblresultado.setText(datosDTO.toString());
@@ -182,10 +185,13 @@ public class JFPrincipal extends javax.swing.JFrame {
     private void btnmostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmostrarActionPerformed
         // TODO add your handling code here:
         lblresultado.setText("");
+        Archivos archivo = new Archivos();
+        listadatos = archivo.leer();
+        datosDTO = listadatos.get(0);
         txtnombre.setText(datosDTO.getNombre());
         txtedad.setText(String.valueOf(datosDTO.getEdad()));
         txtcorreo.setText( datosDTO.getCorreo());
-        
+        archivo.leer();
     }//GEN-LAST:event_btnmostrarActionPerformed
 
     private void btnindiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnindiceActionPerformed

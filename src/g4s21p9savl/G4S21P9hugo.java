@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package g4s21p9hugo;
+package g4s21p9savl;
 
 /**
  *
- * @author hugo4295
+ * @author aaronsvl1
  */
 public class G4S21P9hugo {
 
