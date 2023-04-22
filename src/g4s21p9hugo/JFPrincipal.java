@@ -1,9 +1,10 @@
-/*
+      /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package g4s21p9hugo;
 
+import Almacen.Archivos;
 import Informacion.DatosDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +97,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(246, 246, 246)
                         .addComponent(jLabel1))
@@ -104,26 +105,28 @@ public class JFPrincipal extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnprocesa)
-                                .addGap(55, 55, 55)
-                                .addComponent(btnmostrar)
+                                .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnindice)
+                                .addComponent(txtnombre))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnprocesa)
+                                        .addGap(55, 55, 55)
+                                        .addComponent(btnmostrar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnindice)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtindice, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtindice, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtcorreo)))))
+                                .addComponent(txtcorreo))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(lblnreg)
@@ -168,8 +171,10 @@ public class JFPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         datosDTO = new DatosDTO();
         datosDTO.setNombre(txtnombre.getText());
-        datosDTO.setEdad(Integer.valueOf(txtedad.getText()));
+        datosDTO.setEdad(Integer.parseInt(txtedad.getText()));
         datosDTO.setCorreo(txtcorreo.getText());
+        Archivos archivo = new Archivos();
+        archivo.Grabar(datosDTO.getNombre(),datosDTO.getEdad(),datosDTO.getCorreo());
         listadatos.add(datosDTO);
         lblnreg.setText("Numero de registros: " + String.valueOf(listadatos.size()));
         lblresultado.setText(datosDTO.toString());
@@ -182,9 +187,15 @@ public class JFPrincipal extends javax.swing.JFrame {
     private void btnmostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmostrarActionPerformed
         // TODO add your handling code here:
         lblresultado.setText("");
+        Archivos archivo = new Archivos();
+        listadatos = archivo.Leer();
+        lblnreg.setText("Numero de registros: " + String.valueOf(listadatos.size()));
+        datosDTO = listadatos.get(0);
         txtnombre.setText(datosDTO.getNombre());
         txtedad.setText(String.valueOf(datosDTO.getEdad()));
         txtcorreo.setText( datosDTO.getCorreo());
+        
+        
         
     }//GEN-LAST:event_btnmostrarActionPerformed
 
