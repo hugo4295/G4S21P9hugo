@@ -4,6 +4,7 @@
  */
 package g4s21p9hugo;
 
+import Almacen.Archivos;
 import Informacion.DatosDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class JFPrincipal extends javax.swing.JFrame {
     DatosDTO datosDTO;
     List<DatosDTO> listadatos = new ArrayList<>();
+    private Object archivos;
 
     /**
      * Creates new form JFPrincipal
@@ -102,7 +104,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnprocesa)
                                 .addGap(55, 55, 55)
@@ -111,19 +113,18 @@ public class JFPrincipal extends javax.swing.JFrame {
                                 .addComponent(btnindice)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtindice, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtcorreo)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtnombre))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(lblnreg)
@@ -170,6 +171,8 @@ public class JFPrincipal extends javax.swing.JFrame {
         datosDTO.setNombre(txtnombre.getText());
         datosDTO.setEdad(Integer.valueOf(txtedad.getText()));
         datosDTO.setCorreo(txtcorreo.getText());
+        Archivos archivo =new Archivos();
+        archivo.Grabar(datosDTO.getNombre(),datosDTO.getEdad(),datosDTO.getCorreo());
         listadatos.add(datosDTO);
         lblnreg.setText("Numero de registros: " + String.valueOf(listadatos.size()));
         lblresultado.setText(datosDTO.toString());
@@ -182,10 +185,13 @@ public class JFPrincipal extends javax.swing.JFrame {
     private void btnmostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmostrarActionPerformed
         // TODO add your handling code here:
         lblresultado.setText("");
+        Archivos archivo = new Archivos();
+        listadatos = archivo.Leer();
+        lblnreg.setText("Numero de registros: " + String.valueOf(listadatos.size()));
+        datosDTO = listadatos.get(0);
         txtnombre.setText(datosDTO.getNombre());
         txtedad.setText(String.valueOf(datosDTO.getEdad()));
         txtcorreo.setText( datosDTO.getCorreo());
-        
     }//GEN-LAST:event_btnmostrarActionPerformed
 
     private void btnindiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnindiceActionPerformed
