@@ -4,6 +4,7 @@
  */
 package g4s21p9hugo;
 
+import Almacen.Archivos;
 import Informacion.DatosDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,11 @@ public class JFPrincipal extends javax.swing.JFrame {
         jLabel4.setText("Correo");
 
         txtnombre.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        txtnombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnombreActionPerformed(evt);
+            }
+        });
 
         txtedad.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
 
@@ -170,6 +176,8 @@ public class JFPrincipal extends javax.swing.JFrame {
         datosDTO.setNombre(txtnombre.getText());
         datosDTO.setEdad(Integer.valueOf(txtedad.getText()));
         datosDTO.setCorreo(txtcorreo.getText());
+        Archivos archivo = new Archivos();
+        archivo.Grabar(datosDTO.getNombre(), datosDTO.getEdad(), datosDTO.getCorreo());
         listadatos.add(datosDTO);
         lblnreg.setText("Numero de registros: " + String.valueOf(listadatos.size()));
         lblresultado.setText(datosDTO.toString());
@@ -181,7 +189,12 @@ public class JFPrincipal extends javax.swing.JFrame {
 
     private void btnmostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmostrarActionPerformed
         // TODO add your handling code here:
+        
         lblresultado.setText("");
+        Archivos archivo = new Archivos();
+        listadatos = archivo.Leer();
+        lblnreg.setText("Numero de registros: " + String.valueOf(listadatos.size()));
+        datosDTO = listadatos.get(0);
         txtnombre.setText(datosDTO.getNombre());
         txtedad.setText(String.valueOf(datosDTO.getEdad()));
         txtcorreo.setText( datosDTO.getCorreo());
@@ -196,6 +209,11 @@ public class JFPrincipal extends javax.swing.JFrame {
         txtedad.setText(String.valueOf(datosDTO.getEdad()));
         txtcorreo.setText( datosDTO.getCorreo());
     }//GEN-LAST:event_btnindiceActionPerformed
+
+    private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtnombreActionPerformed
 
     /**
      * @param args the command line arguments

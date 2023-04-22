@@ -50,5 +50,9 @@ public class DatosDTO {
     public String toString() {
         return "Datos ->" + nombre + " " + edad + " " + correo;
     }
+
+    public String setEdad() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
        
 }
