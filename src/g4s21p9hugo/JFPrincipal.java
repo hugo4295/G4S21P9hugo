@@ -4,6 +4,7 @@
  */
 package g4s21p9hugo;
 
+import Almacen.Archivos;
 import Informacion.DatosDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -168,8 +169,10 @@ public class JFPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         datosDTO = new DatosDTO();
         datosDTO.setNombre(txtnombre.getText());
-        datosDTO.setEdad(Integer.valueOf(txtedad.getText()));
+        datosDTO.setEdad(Integer.parseInt(txtedad.getText()));
         datosDTO.setCorreo(txtcorreo.getText());
+        Archivos archivo = new Archivos();
+        archivo.Grabar(datosDTO.getNombre(),datosDTO.getEdad(),datosDTO.getCorreo());
         listadatos.add(datosDTO);
         lblnreg.setText("Numero de registros: " + String.valueOf(listadatos.size()));
         lblresultado.setText(datosDTO.toString());
@@ -182,6 +185,9 @@ public class JFPrincipal extends javax.swing.JFrame {
     private void btnmostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmostrarActionPerformed
         // TODO add your handling code here:
         lblresultado.setText("");
+        Archivos archivo= new Archivos();
+        listadatos = archivo.Leer();
+        datosDTO = listadatos.get(0);
         txtnombre.setText(datosDTO.getNombre());
         txtedad.setText(String.valueOf(datosDTO.getEdad()));
         txtcorreo.setText( datosDTO.getCorreo());
